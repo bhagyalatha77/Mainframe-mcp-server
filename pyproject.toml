@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mf-mcp"
+version = "0.1.0"
+description = "Read-only MCP server for IBM z/OS over TN3270, for Copilot Studio and other MCP agents"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.27,<2",      # Python MCP SDK (MIT)
+    "tnz>=0.6",          # IBM's pure-Python TN3270 client (Apache-2.0)
+    "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx"]
+
+[project.scripts]
+mf-mcp = "mf_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
